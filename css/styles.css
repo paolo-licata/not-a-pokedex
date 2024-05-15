@@ -1,0 +1,36 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto Mono', sans-serif;
+}
+
+h1 {
+    font-family: 'Briem Hand', cursive;
+    font-size: 32px;
+    color: white;
+    margin-left: 30px;
+    margin-top: 10px;
+    display: inline;
+}
+
+h2 {
+    font-size: 28px;
+}
+
+nav {
+    background-color: #680404f1;
+    padding: none;
+    margin: none;
+}
+
+.pokemon-list {
+    background-color: #eceaea;
+    padding: 10px 40px;
+    margin: 20px;
+    display: inline-block;
+    border-color: 3px solid #393939;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px #8c8c8c;
+}
