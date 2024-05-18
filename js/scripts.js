@@ -20,7 +20,8 @@ let pokemonRepository = (function () {
     }
 
     function add(pokemonItem) {
-        pokemonList.add(pokemonItem);
+        pokemonList.push(pokemonItem);
+
     }
 
     return {
@@ -29,10 +30,18 @@ let pokemonRepository = (function () {
     };
 })();
 
+
 pokemonRepository.getAll().forEach(function (pokemon) {
     console.log(pokemon.name + ' is ' + pokemon.height + ' meters tall.' + ' It is a type: ' + pokemon.type);
     document.write('<p>' + pokemon.name + ' is ' + pokemon.height + ' meters tall.' + ' It is a type: ' + pokemon.type + '</p>');
 });
+
+
+
+
+
+
+
 
 
 
