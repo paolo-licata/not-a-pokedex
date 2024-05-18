@@ -14,15 +14,18 @@ let pokemonList = [
     { name: 'Wailmer', height: 2.6, type: 'water' }
 ]
 
-for (let i = 0; i < pokemonList.length; i++) {
-    if (pokemonList[i].height < 1) {
+pokemonList.forEach(function (pokemon) {
+    console.log(pokemon.name + ' is ' + pokemon.height + ' meters tall.' + ' It is a type: ' + pokemon.type);
+    document.write('<p>' + pokemon.name + ' is ' + pokemon.height + ' meters tall.' + ' It is a type: ' + pokemon.type + '</p>');
 
-        document.write(pokemonList[i].name + ": " + " Height: " + pokemonList[i].height + " - This is a small pokemon" + "<br>" + "<br>");
+});
 
-    } else if (pokemonList[i].height >= 1 && pokemonList[i].height < 2.5) {
-        document.write(pokemonList[i].name + " Height: " + pokemonList[i].height + " - This is an average-size pokemon" + "<br>" + "<br>");
 
-    } else {
-        document.write(pokemonList[i].name + " Height: " + pokemonList[i].height + " - That... is big!" + "<br>" + "<br>");
-    }
-}
+
+
+
+
+
+
+
+
