@@ -20,7 +20,19 @@ let pokemonRepository = (function () {
     }
 
     function add(pokemonItem) {
-        pokemonList.push(pokemonItem);
+
+        //Condition introduced to make sure that the next pokemon added is an object, that follows the template used in PokemonList
+
+        if (typeof pokemonItem === 'object' && pokemonItem !== null &&
+            'name' in pokemonItem &&
+            'height' in pokemonItem &&
+            'type' in pokemonItem
+        ) {
+            pokemonList.push(pokemonItem);
+
+        } else {
+            console.error('Invalid PokemonItem. Make sure to enter a object with the specified properties');
+        }
 
     }
 
