@@ -25,12 +25,21 @@ nav {
     margin: none;
 }
 
-.pokemon-list {
-    background-color: #eceaea;
-    padding: 10px 40px;
-    margin: 20px;
+.button-class {
+    width: 200px;
+    background-color: #f8dfd5;
+    border: none;
+    color: #ba8e70;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
     display: inline-block;
-    border-color: 3px solid #393939;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px #8c8c8c;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.2s;
+    cursor: pointer;
+    background-color: #f8dfd5;
+    color: black;
+    border: 2px solid #ba8e70;
 }
