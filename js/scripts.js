@@ -1,23 +1,10 @@
 let pokemonRepository = (function () {
     // Repository of pokemons
-    let repository = [
-        { name: 'Bulbasaur', height: 0.7, type: ['grass', 'poison'] },
-        { name: 'Charmander', height: 0.6, type: 'fire' },
-        { name: 'Squirtle', height: 0.5, type: 'water' },
-        { name: 'Diglett', height: 0.2, type: 'ground' },
-        { name: 'Pikachu', height: 0.4, type: 'electric' },
-        { name: 'Ekan', height: 2, type: 'poison' },
-        { name: 'Pidgey', height: 0.3, type: ['flying', 'normal'] },
-        { name: 'Onix', height: 8.8, type: ['rock', 'ground'] },
-        { name: 'Paras', height: 0.3, type: ['grass', 'bug'] },
-        { name: 'Vulpix', height: 0.6, type: 'fire' },
-        { name: 'Snorlax', height: 2.8, type: 'normal' },
-        { name: 'Eevee', height: 0.3, type: 'normal' },
-        { name: 'Wailmer', height: 2.6, type: 'water' }
-    ]
+    let pokemonList = [];
+    let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
     function getAll() {
-        return repository;
+        return pokemonList;
     }
 
     function add(pokemonItem) {
@@ -26,10 +13,9 @@ let pokemonRepository = (function () {
 
         if (typeof pokemonItem === 'object' && pokemonItem !== null &&
             'name' in pokemonItem &&
-            'height' in pokemonItem &&
-            'type' in pokemonItem
+            'detailsUrl' in pokemonItem
         ) {
-            repository.push(pokemonItem);
+            pokemonList.push(pokemonItem);
 
         } else {
             console.error('Invalid PokemonItem. Make sure to enter a object with the specified properties');
@@ -39,9 +25,6 @@ let pokemonRepository = (function () {
 
     // logs details of pokemons in repository
 
-    function showDetails(pokemon) {
-        console.log(pokemon);
-    }
 
     function addListItem(pokemon) {
         let pokemonList = document.querySelector(".pokemon-list");
@@ -52,6 +35,42 @@ let pokemonRepository = (function () {
         listpokemon.appendChild(button);
         pokemonList.appendChild(listpokemon);
         addEventListenerToButton(button, pokemon);
+    }
+
+    function loadList() {
+        return fetch(apiUrl).then(function (response) {
+            return response.json();
+        }).then(function (json) {
+            json.results.forEach(function (item) {
+                let pokemon = {
+                    name: item.name,
+                    detailsUrl: item.url
+                };
+                add(pokemon);
+            });
+        }).catch(function (e) {
+            console.error(e);
+        })
+    }
+
+    function loadDetails(item) {
+        let url = item.detailsUrl;
+        return fetch(url).then(function (response) {
+            return response.json();
+        }).then(function (details) {
+            // Now we add the details to the item
+            item.imageUrl = details.sprites.front_default;
+            item.height = details.height;
+            item.types = details.types;
+        }).catch(function (e) {
+            console.error(e);
+        });
+    }
+
+    function showDetails(pokemon) {
+        loadDetails(pokemon).then(function () {
+            console.log(pokemon);
+        });
     }
 
     // function that adds the eventListener to the button
@@ -65,16 +84,19 @@ let pokemonRepository = (function () {
         getAll: getAll,
         add: add,
         addListItem: addListItem,
-        showDetails: showDetails
+        loadList: loadList,
+        loadDetails: loadDetails,
+        showDetails: showDetails,
+
     };
 
 })();
 
-pokemonRepository.getAll().forEach(function (pokemonItem) {
-    pokemonRepository.addListItem(pokemonItem);
-
+pokemonRepository.loadList().then(function () {
+    pokemonRepository.getAll().forEach(function (pokemonItem) {
+        pokemonRepository.addListItem(pokemonItem);
+    });
 });
-
 
 
 
