@@ -25,11 +25,23 @@
         <h1>Not-a-Pokedex</h1>
     </nav>
 
-    <div>
-        <h2>Pokemons Collection</h2>
+    <h2>Pokemons Collection</h2>
+
+
+    <div class="button-container">
 
         <ul class="pokemon-list"></ul>
 
+    </div>
+
+    <div id="pokemon-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3 class="pokemon-name"></h3>
+            <img class="pokemon-image" src="#" alt="Pokemon Image">
+            <p class="pokemon-height"></p>
+            <p class="pokemon-type"></p>
+        </div>
     </div>
 
     <script src="js/promise-polyfill.js"></script>

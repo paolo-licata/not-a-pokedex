@@ -59,6 +59,7 @@ let pokemonRepository = (function () {
             return response.json();
         }).then(function (details) {
             // Now we add the details to the item
+            item.name = details.name;
             item.imageUrl = details.sprites.front_default;
             item.height = details.height;
             item.types = details.types;
@@ -69,7 +70,37 @@ let pokemonRepository = (function () {
 
     function showDetails(pokemon) {
         loadDetails(pokemon).then(function () {
-            console.log(pokemon);
+
+            let modal = document.getElementById('pokemon-modal');
+
+            let span = document.querySelector('.close-button');
+
+            modal.querySelector('.pokemon-name').innerText = pokemon.name;
+            modal.querySelector('.pokemon-image').src = pokemon.imageUrl;
+            modal.querySelector('.pokemon-height').innerText = 'Height: ' + pokemon.height;
+            modal.querySelector('.pokemon-type').innerText = 'Type: ' + pokemon.types;
+
+
+            modal.style.display = "block";
+
+            //adding the event listener with .onclick 
+            span.onclick = function () {
+                modal.style.display = "none";
+            }
+
+            //adding event listener for ESC key
+            window.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') {
+                    modal.style.display = 'none';
+                }
+            });
+
+
+            window.onclick = function (e) {
+                if (e.target === modal) {
+                    modal.style.display = "none";
+                }
+            }
         });
     }
 
