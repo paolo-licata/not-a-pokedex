@@ -75,10 +75,16 @@ let pokemonRepository = (function () {
 
             let span = document.querySelector('.close-button');
 
+            let pokemonTypes = [];
+            pokemon.types.forEach(function (type) {
+                pokemonTypes.push(type.type.name);
+            })
+
             modal.querySelector('.pokemon-name').innerText = pokemon.name;
             modal.querySelector('.pokemon-image').src = pokemon.imageUrl;
             modal.querySelector('.pokemon-height').innerText = 'Height: ' + pokemon.height;
-            modal.querySelector('.pokemon-type').innerText = 'Type: ' + pokemon.types;
+            modal.querySelector('.pokemon-type').innerText = 'Type: ' + pokemonTypes;
+
 
 
             modal.style.display = "block";
