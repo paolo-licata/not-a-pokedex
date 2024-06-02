@@ -27,9 +27,12 @@ let pokemonRepository = (function () {
 
 
     function addListItem(pokemon) {
-        let pokemonList = document.querySelector(".pokemon-list");
+        let pokemonList = document.querySelector(".row");
+
         let listpokemon = document.createElement("li");
-        let button = document.createElement("button");
+        listpokemon.classList.add("col-12", "col-md-6", "col-lg-4")
+
+        let button = document.createElement("button", "btn", "btn-secondary");
         button.innerText = pokemon.name;
         button.classList.add("button-class");
         listpokemon.appendChild(button);
@@ -134,6 +137,27 @@ pokemonRepository.loadList().then(function () {
         pokemonRepository.addListItem(pokemonItem);
     });
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
