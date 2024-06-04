@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="./img/magnifier.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="./img/pokeball.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
         integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
         crossorigin="anonymous" referrerpolicy="no-referrer">
@@ -25,12 +25,15 @@
 
 <body>
 
-    <nav class="navbar navbar-dark bg-dark">
+    <nav class="navbar navbar-dark bg-dark fixed-top">
         <a class="navbar-brand" href="#">
-            <img src="img/64px-Poké_Ball_icon.svg.png" width="30" height="30" class="d-inline-block align-top" alt="">
+            <img src="img/64px-Poké_Ball_icon.svg.png" width="30" height="30" class="d-inline-block align-top"
+                alt="pokeball">
             Not-a-Pokedex
         </a>
     </nav>
+
+    <!--bootstrap container-->
 
     <div class="container">
 
@@ -38,16 +41,28 @@
 
     </div>
 
-    <div id="pokemon-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <h3 class="pokemon-name"></h3>
-            <img class="pokemon-image" src="#" alt="Pokemon Image">
-            <p class="pokemon-height"></p>
-            <p class="pokemon-type"></p>
+    <!--Simple boostrap modal-->
+
+    <div class="modal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
         </div>
     </div>
 
+    <!--jQuery, Popper, Bootstrap and custom script-->
     <script src="js/promise-polyfill.js"></script>
     <script src="js/fetch.umd.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
