@@ -3,42 +3,34 @@ let pokemonRepository = (function () {
     let pokemonList = [];
     let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
-
     function getAll() {
         return pokemonList;
     }
 
     function add(pokemonItem) {
-
         // Condition introduced to make sure that the next pokemon added is an object, that follows the template used in PokemonList
-
         if (typeof pokemonItem === 'object' && pokemonItem !== null &&
             'name' in pokemonItem &&
-            'detailsUrl' in pokemonItem
-        ) {
+            'detailsUrl' in pokemonItem) {
             pokemonList.push(pokemonItem);
-
         } else {
-            console.error('Invalid PokemonItem. Make sure to enter a object with the specified properties');
+            console.error('Invalid PokemonItem. Make sure to enter an object with the specified properties');
         }
-
     }
 
-    // logs details of pokemons in repository
-
-
+    // Logs details of pokemons in repository
     function addListItem(pokemon) {
-        let pokemonList = document.querySelector(".row");
+        let listContainer = document.querySelector(".row");
 
         let listpokemon = document.createElement("li");
-        listpokemon.classList.add("col-12", "col-sm-6", "col-md-4", "col-lg-3")
+        listpokemon.classList.add("col-12", "col-sm-6", "col-md-4", "col-lg-3");
 
-        let button = document.createElement("button", "btn", "btn-secondary");
+        let button = document.createElement("button");
         button.innerText = pokemon.name;
-        button.classList.add("button-class");
+        button.classList.add("btn", "btn-secondary", "button-class");
 
         listpokemon.appendChild(button);
-        pokemonList.appendChild(listpokemon);
+        listContainer.appendChild(listpokemon);
         addEventListenerToButton(button, pokemon);
     }
 
@@ -55,7 +47,7 @@ let pokemonRepository = (function () {
             });
         }).catch(function (e) {
             console.error(e);
-        })
+        });
     }
 
     function loadDetails(item) {
@@ -104,12 +96,11 @@ let pokemonRepository = (function () {
         });
     }
 
-
-    // function that adds the eventListener to the button
+    // Function that adds the event listener to the button
     function addEventListenerToButton(button, pokemon) {
         button.addEventListener('click', function () {
             showDetails(pokemon);
-        })
+        });
     }
 
     return {
@@ -118,8 +109,7 @@ let pokemonRepository = (function () {
         addListItem: addListItem,
         loadList: loadList,
         loadDetails: loadDetails,
-        showDetails: showDetails,
-
+        showDetails: showDetails
     };
 
 })();
@@ -129,6 +119,9 @@ pokemonRepository.loadList().then(function () {
         pokemonRepository.addListItem(pokemonItem);
     });
 });
+
+
+
 
 
 
