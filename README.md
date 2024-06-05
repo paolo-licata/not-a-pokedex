@@ -31,4 +31,4 @@ The main styles are created with Bootstrap and modified in the `styles.css` file
 
 #### Minified CSS and JS
 
-The CSS has been minified to reduce file size and improve load times. Below is the minified version of the CSS.
+The CSS and JS have been minified to reduce file size and improve load times.
