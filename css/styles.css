@@ -66,3 +66,9 @@ li {
     width: 100%;
     height: auto;
 }
+
+@media all and (min-width: 300px) and (max-width: 575px) {
+    .button-class {
+        transform: translateY(150px);
+    }
+}
