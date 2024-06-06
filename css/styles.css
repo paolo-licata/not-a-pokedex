@@ -71,4 +71,13 @@ li {
     .button-class {
         transform: translateY(150px);
     }
+
+    .col-12 {
+        text-align: center;
+    }
+
+    #search-input {
+        width: 200px;
+        margin-right: 10px;
+    }
 }
