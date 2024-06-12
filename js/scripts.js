@@ -1,5 +1,4 @@
 let pokemonRepository = (function () {
-    // Repository of pokemons
     let pokemonList = [];
     let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
@@ -8,7 +7,6 @@ let pokemonRepository = (function () {
     }
 
     function add(pokemonItem) {
-        // Condition introduced to make sure that the next pokemon added is an object, that follows the template used in PokemonList
         if (typeof pokemonItem === 'object' && pokemonItem !== null &&
             'name' in pokemonItem &&
             'detailsUrl' in pokemonItem) {
@@ -18,7 +16,6 @@ let pokemonRepository = (function () {
         }
     }
 
-    // Logs details of pokemons in repository
     function addListItem(pokemon) {
         let listContainer = document.querySelector(".row");
 
@@ -26,9 +23,15 @@ let pokemonRepository = (function () {
         listpokemon.classList.add("col-12", "col-sm-6", "col-md-4", "col-lg-3");
 
         let button = document.createElement("button");
-        button.innerText = pokemon.name;
         button.classList.add("btn", "btn-secondary", "button-class");
 
+        let imageElement = document.createElement('img');
+        imageElement.src = pokemon.imageUrl;
+        imageElement.classList.add('pokemon-button-image');
+
+        button.appendChild(imageElement);
+        button.appendChild(document.createTextNode(pokemon.name));
+        
         listpokemon.appendChild(button);
         listContainer.appendChild(listpokemon);
         addEventListenerToButton(button, pokemon);
@@ -55,7 +58,6 @@ let pokemonRepository = (function () {
         return fetch(url).then(function (response) {
             return response.json();
         }).then(function (details) {
-            // Now we add the details to the item
             item.name = details.name;
             item.imageUrl = details.sprites.front_default;
             item.height = details.height;
@@ -70,11 +72,9 @@ let pokemonRepository = (function () {
             let modalTitle = document.querySelector('.modal-title');
             let modalBody = document.querySelector('.modal-body');
 
-            // Clear existing content
             modalTitle.innerHTML = '';
             modalBody.innerHTML = '';
 
-            // Set new content
             modalTitle.innerText = pokemon.name;
 
             let imageElement = document.createElement('img');
@@ -91,12 +91,10 @@ let pokemonRepository = (function () {
             modalBody.appendChild(heightElement);
             modalBody.appendChild(typesElement);
 
-            // Show the modal
             $('.modal').modal('show');
         });
     }
 
-    // Function that adds the event listener to the button
     function addEventListenerToButton(button, pokemon) {
         button.addEventListener('click', function () {
             showDetails(pokemon);
@@ -115,8 +113,13 @@ let pokemonRepository = (function () {
 })();
 
 pokemonRepository.loadList().then(function () {
-    pokemonRepository.getAll().forEach(function (pokemonItem) {
-        pokemonRepository.addListItem(pokemonItem);
+    let allPokemon = pokemonRepository.getAll();
+    let loadDetailsPromises = allPokemon.map(pokemon => pokemonRepository.loadDetails(pokemon));
+    
+    Promise.all(loadDetailsPromises).then(function () {
+        allPokemon.forEach(function (pokemonItem) {
+            pokemonRepository.addListItem(pokemonItem);
+        });
     });
 });
 
@@ -130,12 +133,13 @@ function filterPokemon(searchTerm) {
     let filteredList = pokemonRepository.getAll().filter(pokemon => pokemon.name.toLowerCase().includes(searchTerm));
     
     let listContainer = document.querySelector(".row");
-    listContainer.innerHTML = ''; // Clear the existing list
+    listContainer.innerHTML = '';
 
     filteredList.forEach(pokemon => {
         pokemonRepository.addListItem(pokemon);
     });
 }
+
 
 
 

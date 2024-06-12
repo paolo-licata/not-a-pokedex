@@ -21,9 +21,20 @@ li {
     padding: 16px 32px;
     font-size: 16px;
     cursor: pointer;
-    background-color: #6f7f8e;
-    color: #ffffff;
+    background-color: #c6cfd7;
+    color: #000;
     border: 2px solid #191e40f1;
+}
+
+.button-class:hover {
+    background-color: #7b9196;
+}
+
+.pokemon-button-image {
+    width: 160px; 
+    height: 160px; 
+    transform: translateX(-30px);
+    vertical-align: middle;
 }
 
 .modal {
@@ -57,7 +68,7 @@ li {
 
 .close-button:hover,
 .close-button:focus {
-    color: #191e40f1;
+    color: #193440f1;
     text-decoration: none;
     cursor: pointer;
 }
